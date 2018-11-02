@@ -107,7 +107,7 @@ for i in range(params.studentCount + 1):
  # for packet sniffing, we need one target node that would run a netcat listening post and also 
  # run various programs that keep sending packets to the instructor's machine
  if params.seedlabtype == "packet_sniffing":                 
-   node = Node("target")
+   node = Node("target", false)
    node.disk_image = IMAGE
    local_ip_count += 1
    iface = node.addInterface("if" + str(local_ip_count))
