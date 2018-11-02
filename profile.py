@@ -46,8 +46,7 @@ pc.defineParameter("seedlabtype","SEED Lab",
                     ("environment-setuid","Environment Variable and Set-UID"),
                     ("csrf","Cross-site Request Forgery"),
                     ("xsf","Cross-site Scripting Attack"),
-                    ("sql","SQL Injection Attack")],
-                   longDescription="We provide a number of labs. The experiment will be instantiated based on the selected lab.")
+                    ("sql","SQL Injection Attack")])
 pc.defineParameter("studentCount", "Number of students",
                    portal.ParameterType.INTEGER, 1)
 pc.defineParameter("raw", "Use physical nodes",
