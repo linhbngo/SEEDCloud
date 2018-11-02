@@ -105,5 +105,9 @@ for i in range(params.studentCount + 1):
     iface.component_id = "eth1"                    
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     lan.addInterface(iface)
-                    
+    rspec.addResource(node)
+    
+    
+    
+    
 pc.printRequestRSpec(rspec)
