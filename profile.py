@@ -38,15 +38,7 @@ pc = portal.Context()
 #
 
 pc.defineParameter("seedlabtype","SEED Lab",
-                   portal.ParameterType.STRING,"Packet Sniffing and Spoofing",
-                   [("packet_sniffing","Packet Sniffing and Spoofing"),
-                    ("tcp_ip","TCP/IP Attack"),
-                    ("buffer_overflow","Buffer Overflow Vulnerability"),
-                    ("return-to-libc","Return-to-Libc Attack"),
-                    ("environment-setuid","Environment Variable and Set-UID"),
-                    ("csrf","Cross-site Request Forgery"),
-                    ("xsf","Cross-site Scripting Attack"),
-                    ("sql","SQL Injection Attack")])
+                   portal.ParameterType.STRING,"Packet Sniffing and Spoofing",[("packet_sniffing","Packet Sniffing and Spoofing"),("tcp_ip","TCP/IP Attack"),("buffer_overflow","Buffer Overflow Vulnerability"),("return-to-libc","Return-to-Libc Attack"),("environment-setuid","Environment Variable and Set-UID"),("csrf","Cross-site Request Forgery"),("xsf","Cross-site Scripting Attack"),("sql","SQL Injection Attack")])
 pc.defineParameter("studentCount", "Number of students",
                    portal.ParameterType.INTEGER, 1)
 pc.defineParameter("raw", "Use physical nodes",
