@@ -89,7 +89,7 @@ def Node(name, public):
 lan = RSpec.LAN()
 rspec.addResource(lan)
 prefixForIP = "192.168.1."
-local_ip+count = 0                   
+local_ip_count = 0                   
 for i in range(params.studentCount + 1):
   if params.seedlabtype == "packet_sniffing":
     if i == 0:
