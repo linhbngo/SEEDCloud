@@ -69,7 +69,7 @@ def Node(name, public):
   if params.raw:
     newnode = RSpec.RawPC(name)
   else:
-    newnode = RSpec.XenVM(name)
+    newnode = IG.XenVM(name)
     newnode.ram = 2048
     newnode.cores = 2
   if public:
