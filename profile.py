@@ -81,9 +81,9 @@ def Node(name, public):
     newnode = geni.rspec.igext.XenVM(name)
     newnode.ram = 2048
     newnode.cores = 2
- if public:
+  if public:
    newnode.routable_control_ip = True
- return newnode                    
+  return newnode                    
 
 # Setup experiments for individual students plus one lab instructor
 lan = RSpec.LAN()
