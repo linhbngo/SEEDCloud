@@ -84,9 +84,9 @@ local_ip_count = 0
 for i in range(params.studentCount + 1):
   if params.seedlabtype == "packet_sniffing":
     if i == 0:
-      node = Node("instructor", false)
+      node = Node("instructor", False)
     else:
-      node = Node("lab_instance_"+str(i), false)
+      node = Node("lab_instance_"+str(i), False)
     node.disk_image = IMAGE
     local_ip_count += 1                    
     iface = node.addInterface("if" + str(local_ip_count))
@@ -98,7 +98,7 @@ for i in range(params.studentCount + 1):
   # for packet sniffing, we need one target node that would run a netcat listening post and also 
   # run various programs that keep sending packets to the instructor's machine
   if params.seedlabtype == "packet_sniffing":                 
-    node = Node("target", false)
+    node = Node("target", False)
     node.disk_image = IMAGE
     local_ip_count += 1
     iface = node.addInterface("if" + str(local_ip_count))
