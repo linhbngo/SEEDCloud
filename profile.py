@@ -104,15 +104,15 @@ for i in range(params.studentCount + 1):
     link.addInterface(iface)
     rspec.addResource(node)
                     
- # for packet sniffing, we need one target node that would run a netcat listening post and also 
- # run various programs that keep sending packets to the instructor's machine
- if params.seedlabtype == "packet_sniffing":                 
-   node = Node("target", false)
-   node.disk_image = IMAGE
-   local_ip_count += 1
-   iface = node.addInterface("if" + str(local_ip_count))
-   iface.component_id = "eth1"                    
-   iface.addAddress(pg.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-   link.addInterface(iface)
+  # for packet sniffing, we need one target node that would run a netcat listening post and also 
+  # run various programs that keep sending packets to the instructor's machine
+  if params.seedlabtype == "packet_sniffing":                 
+    node = Node("target", false)
+    node.disk_image = IMAGE
+    local_ip_count += 1
+    iface = node.addInterface("if" + str(local_ip_count))
+    iface.component_id = "eth1"                    
+    iface.addAddress(pg.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
+    link.addInterface(iface)
                     
 pc.printRequestRSpec(rspec)
