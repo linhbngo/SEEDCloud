@@ -91,7 +91,7 @@ for i in range(params.studentCount + 1):
     local_ip_count += 1                    
     iface = node.addInterface("if" + str(local_ip_count))
     iface.component_id = "eth1"
-    iface.addAddress(pg.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
+    iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     link.addInterface(iface)
     rspec.addResource(node)
                     
@@ -103,7 +103,7 @@ for i in range(params.studentCount + 1):
     local_ip_count += 1
     iface = node.addInterface("if" + str(local_ip_count))
     iface.component_id = "eth1"                    
-    iface.addAddress(pg.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
+    iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     link.addInterface(iface)
                     
 pc.printRequestRSpec(rspec)
