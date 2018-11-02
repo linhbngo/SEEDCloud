@@ -92,7 +92,7 @@ for i in range(params.studentCount + 1):
     iface = node.addInterface("if" + str(local_ip_count))
     iface.component_id = "eth1"
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-    link.addInterface(iface)
+    lan.addInterface(iface)
     rspec.addResource(node)
                     
   # for packet sniffing, we need one target node that would run a netcat listening post and also 
@@ -104,6 +104,6 @@ for i in range(params.studentCount + 1):
     iface = node.addInterface("if" + str(local_ip_count))
     iface.component_id = "eth1"                    
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-    link.addInterface(iface)
+    lan.addInterface(iface)
                     
 pc.printRequestRSpec(rspec)
