@@ -13,7 +13,6 @@ import sys
 
 TBURL = "http://www.emulab.net/downloads/openstack-setup-v33.tar.gz"
 TBPERM = "sudo chmod -R 755 /local/repository/*.sh"
-TBCMD = "sudo mkdir -p /root/setup && (if [ -d /local/repository ]; then sudo -H /local/repository/setup-driver.sh 2>&1 | sudo tee /root/setup/setup-driver.log; else sudo -H /tmp/setup/setup-driver.sh 2>&1 | sudo tee /root/setup/setup-driver.log; fi)"
 IMAGE = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
 
 #
@@ -95,17 +94,17 @@ for i in range(params.studentCount + 1):
     lan.addInterface(iface)
     rspec.addResource(node)
                     
-  # for packet sniffing, we need one target node that would run a netcat listening post and also 
-  # run various programs that keep sending packets to the instructor's machine
-  if params.seedlabtype == "packet_sniffing":                 
-    node = Node("target", False)
-    node.disk_image = IMAGE
-    local_ip_count += 1
-    iface = node.addInterface("if" + str(local_ip_count))
-    iface.component_id = "eth1"                    
-    iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-    lan.addInterface(iface)
-    rspec.addResource(node)
+# for packet sniffing, we need one target node that would run a netcat listening post and also 
+# run various programs that keep sending packets to the instructor's machine
+if params.seedlabtype == "packet_sniffing":                 
+  node = Node("target", False)
+  node.disk_image = IMAGE
+  local_ip_count += 1
+  iface = node.addInterface("if" + str(local_ip_count))
+  iface.component_id = "eth1"                    
+  iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
+  lan.addInterface(iface)
+  rspec.addResource(node)
     
     
     
