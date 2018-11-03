@@ -92,7 +92,7 @@ for i in range(params.studentCount + 1):
     iface.component_id = "eth1"
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     lan.addInterface(iface)
-    node.addService(RSpec.Execute("sh", "sudo /local/repository/setup_scripts/general.sh"))
+    node.addService(RSpec.Execute("sh", "sudo bash -c /local/repository/setup_scripts/general.sh"))
     rspec.addResource(node)
                     
 # for packet sniffing, we need one target node that would run a netcat listening post and also 
@@ -105,8 +105,8 @@ if params.seedlabtype == "packet_sniffing":
   iface.component_id = "eth1"                    
   iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
   lan.addInterface(iface)
-  node.addService(RSpec.Execute("sh", "sudo /local/repository/setup_scripts/general.sh"))
-  node.addService(RSpec.Execute("sh", "sudo /local/repository/setup_scripts/packet_sniffing/target.sh"))
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/packet_sniffing/target.sh"))
   rspec.addResource(node)
     
     
