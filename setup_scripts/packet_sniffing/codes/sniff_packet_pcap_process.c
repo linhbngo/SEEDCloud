@@ -1,7 +1,7 @@
 #include <pcap.h>
 #include <stdio.h>
 #include <arpa/inet.h>
-
+#include <net/ethernet.h>
 
 /* Ethernet header */
 struct ethheader {
