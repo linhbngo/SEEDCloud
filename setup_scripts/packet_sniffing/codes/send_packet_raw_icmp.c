@@ -63,7 +63,7 @@ int main() {
    ip->iph_ihl = 5;
    ip->iph_ttl = 20;
    ip->iph_sourceip.s_addr = inet_addr("1.2.3.4");
-   ip->iph_destip.s_addr = inet_addr("10.0.2.5");
+   ip->iph_destip.s_addr = inet_addr("192.168.1.1");
    ip->iph_protocol = IPPROTO_ICMP; 
    ip->iph_len = htons(sizeof(struct ipheader) + 
                        sizeof(struct icmpheader));
