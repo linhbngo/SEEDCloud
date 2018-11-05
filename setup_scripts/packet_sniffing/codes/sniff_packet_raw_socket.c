@@ -2,7 +2,6 @@
 #include <linux/if_packet.h>
 #include <net/ethernet.h>
 #include <stdio.h>
-#include <conio.h>
 
 int main() {
     int PACKET_LEN = 512;
@@ -19,7 +18,7 @@ int main() {
                      sizeof(mr));
 
     // Getting captured packets
-    while (!kbhit()) {
+    while (1) {
         int data_size=recvfrom(sock, buffer, PACKET_LEN, 0,  
 	                 &saddr, (socklen_t*)sizeof(saddr));
         if(data_size) printf("Got one packet\n");
