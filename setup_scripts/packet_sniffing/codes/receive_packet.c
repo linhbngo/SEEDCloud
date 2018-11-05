@@ -2,7 +2,6 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <netinet/ip.h>
-#include <conio.h>
 
 void main()
 {
@@ -21,7 +20,7 @@ void main()
     if (bind(sock, (struct sockaddr *) &server, sizeof(server)) < 0)
         error("ERROR on binding");
 
-    while (!kbhit()) {
+    while (1) {
         bzero(buf, 1500);
         recvfrom(sock, buf, 1500-1, 0, 
 	               (struct sockaddr *) &client, &clientlen);
