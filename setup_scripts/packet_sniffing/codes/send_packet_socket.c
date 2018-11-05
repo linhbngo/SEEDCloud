@@ -14,7 +14,7 @@ void main()
     // Step 2: Provide information about destination.
     memset((char *) &dest_info, 0, sizeof(dest_info));
     dest_info.sin_family = AF_INET;
-    dest_info.sin_addr.s_addr = inet_addr("10.0.2.5");
+    dest_info.sin_addr.s_addr = inet_addr("192.168.1.1");
     dest_info.sin_port = htons(9090);
 
     // Step 3: Send out the packet.
