@@ -145,9 +145,7 @@ void spoof_reply(struct ipheader* ip)
 void spoof_icmp(struct ipheader* ip)
 {
   const char buffer[1500];
-  int ip_header_len = ip->iph_ihl * 4;
-  struct udpheader* udp = (struct udpheader *) ((u_char *)ip + 
-                                                  ip_header_len);
+
   // Step 1: Make a copy from the original packet 
   memset((char*)buffer, 0, 1500);
   struct icmpheader *icmp = (struct icmpheader *) 
@@ -161,15 +159,14 @@ void spoof_icmp(struct ipheader* ip)
   struct ipheader  * newip  = (struct ipheader *) buffer;
 
   // Step 4: Construct the IP header (no change for other fields)
-  newip->iph_ver = 4;
-  newip->iph_ihl = 5;
-  newip->iph_ttl = 20;
+  newip->iph_ver = ip->iph_ver;
+  newip->iph_ihl = ip->iph_ihl;
+  newip->iph_ttl = ip->iph_ttl;
   newip->iph_sourceip = ip->iph_destip;
   newip->iph_destip = ip->iph_sourceip;
-  newip->iph_ttl = 20; 
-  newip->iph_protocol = IPPROTO_ICMP;
+  newip->iph_protocol = ip->iph_protocol;
   newip->iph_len = htons(sizeof(struct ipheader) +
-                           sizeof(struct icmp));
+                           sizeof(struct icmpheader));
 
    // Step 5: Send out the spoofed IP packet
    send_raw_ip_packet(newip);
