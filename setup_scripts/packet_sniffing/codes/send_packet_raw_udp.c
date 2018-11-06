@@ -116,7 +116,6 @@ int main() {
    /*********************************************************
       Step 3: Fill in the IP header.
     ********************************************************/
-   struct ipheader *ip = (struct ipheader *) buffer;
    ip->iph_ver = 4;
    ip->iph_ihl = 5;
    ip->iph_ttl = 20;
