@@ -22,6 +22,15 @@ struct udpheader
   u_int16_t udp_sum;             /* udp checksum */
 };
 
+/* ICMP Header  */
+struct icmpheader {
+  unsigned char icmp_type; // ICMP message type
+  unsigned char icmp_code; // Error code
+  unsigned short int icmp_chksum; //Checksum for ICMP Header and data
+  unsigned short int icmp_id;     //Used for identifying request
+  unsigned short int icmp_seq;    //Sequence number
+};
+
 /* IP Header */
 struct ipheader {
   unsigned char      iph_ihl:4, //IP header length
@@ -58,6 +67,35 @@ void send_raw_ip_packet(struct ipheader* ip)
     sendto(sock, ip, ntohs(ip->iph_len), 0, 
            (struct sockaddr *)&dest_info, sizeof(dest_info));
     close(sock);
+}
+
+unsigned short in_cksum (unsigned short *buf, int length)
+{
+   unsigned short *w = buf;
+   int nleft = length;
+   int sum = 0;
+   unsigned short temp=0;
+
+   /*
+    * The algorithm uses a 32 bit accumulator (sum), adds
+    * sequential 16 bit words to it, and at the end, folds back all 
+    * the carry bits from the top 16 bits into the lower 16 bits.
+    */
+   while (nleft > 1)  {
+       sum += *w++;
+       nleft -= 2;
+   }
+
+   /* treat the odd byte at the end, if any */
+   if (nleft == 1) {
+        *(u_char *)(&temp) = *(u_char *)w ;
+        sum += temp;
+   }
+
+   /* add back carry outs from top 16 bits to low 16 bits */
+   sum = (sum >> 16) + (sum & 0xffff);  // add hi 16 to low 16 
+   sum += (sum >> 16);                  // add carry 
+   return (unsigned short)(~sum);
 }
 
 void spoof_reply(struct ipheader* ip)
@@ -104,6 +142,39 @@ void spoof_reply(struct ipheader* ip)
     send_raw_ip_packet(newip);
 }
 
+void spoof_icmp(struct ipheader* ip)
+{
+  const char buffer[1500];
+  int ip_header_len = ip->iph_ihl * 4;
+  struct udpheader* udp = (struct udpheader *) ((u_char *)ip + 
+                                                  ip_header_len);
+  // Step 1: Make a copy from the original packet 
+  memset((char*)buffer, 0, 1500);
+  struct icmpheader *icmp = (struct icmpheader *) 
+                             (buffer + sizeof(struct ipheader));
+  icmp->icmp_type = 0; //ICMP Type: 8 is request, 0 is reply.
+
+  // Calculate the checksum for integrity
+  icmp->icmp_chksum = 0;
+  icmp->icmp_chksum = in_cksum((unsigned short *)icmp, 
+                                sizeof(struct icmpheader));
+  struct ipheader  * newip  = (struct ipheader *) buffer;
+
+  // Step 4: Construct the IP header (no change for other fields)
+  newip->iph_ver = 4;
+  newip->iph_ihl = 5;
+  newip->iph_ttl = 20;
+  newip->iph_sourceip = ip->iph_destip;
+  newip->iph_destip = ip->iph_sourceip;
+  newip->iph_ttl = 20; 
+  newip->iph_protocol = IPPROTO_ICMP;
+  newip->iph_len = htons(sizeof(struct ipheader) +
+                           sizeof(struct icmp));
+
+   // Step 5: Send out the spoofed IP packet
+   send_raw_ip_packet(newip);
+}
+
 void got_packet(u_char *args, const struct pcap_pkthdr *header, 
                               const u_char *packet)
 {
@@ -125,7 +196,10 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
             spoof_reply(ip);
             return;
         case IPPROTO_ICMP:
-            //printf("   Protocol: ICMP\n");
+            printf("   Protocol: ICMP\n");
+            printf("       From: %s\n", inet_ntoa(ip->iph_sourceip));  
+            printf("         To: %s\n", inet_ntoa(ip->iph_destip)); 
+            spoof_icmp(ip);
             return;
         default:
             //printf("   Protocol: others\n");
