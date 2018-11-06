@@ -71,8 +71,8 @@ void spoof_reply(struct ipheader* ip)
         return;
     } else {
       printf("Got one! \n");
-      printf("       From: %s\n", inet_ntoa(ip->iph_sourceip));  
-      printf("         To: %s\n", inet_ntoa(ip->iph_destip)); 
+      printf("      Spoof from: %s\n", inet_ntoa(ip->iph_sourceip));  
+      printf("      Spoof to: %s\n", inet_ntoa(ip->iph_destip)); 
     }
 
     // Step 1: Make a copy from the original packet 
