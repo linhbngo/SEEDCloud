@@ -9,6 +9,15 @@ struct ethheader {
   u_short ether_type;                  /* IP? ARP? RARP? etc */
 };
 
+/* UDP Header */
+struct udpheader
+{
+  u_int16_t udp_sport;           /* source port */
+  u_int16_t udp_dport;           /* destination port */
+  u_int16_t udp_ulen;            /* udp length */
+  u_int16_t udp_sum;             /* udp checksum */
+};
+
 /* IP Header */
 struct ipheader {
   unsigned char      iph_ihl:4, //IP header length
