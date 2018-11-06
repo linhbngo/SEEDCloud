@@ -116,8 +116,12 @@ int main() {
    /*********************************************************
       Step 3: Fill in the IP header.
     ********************************************************/
-
-   ...... /* Code omitted here; same as that in (*@Listing~\ref{snoof:list:icmpecho}@*) */
+   struct ipheader *ip = (struct ipheader *) buffer;
+   ip->iph_ver = 4;
+   ip->iph_ihl = 5;
+   ip->iph_ttl = 20;
+   ip->iph_sourceip.s_addr = inet_addr("1.2.3.4");
+   ip->iph_destip.s_addr = inet_addr("192.168.1.1");
    ip->iph_protocol = IPPROTO_UDP; // The value is 17.
    ip->iph_len = htons(sizeof(struct ipheader) +
                        sizeof(struct udpheader) + data_len);
