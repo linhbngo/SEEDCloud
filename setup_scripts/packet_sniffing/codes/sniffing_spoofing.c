@@ -1,3 +1,5 @@
+#include <fcntl.h> 
+#include <unistd.h> 
 #include <pcap.h>
 #include <stdio.h>
 #include <arpa/inet.h>
