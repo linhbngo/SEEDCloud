@@ -110,25 +110,24 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
 
   if (ntohs(eth->ether_type) == 0x0800) { // 0x0800 is IP type
     struct ipheader * ip = (struct ipheader *)
-                           (packet + sizeof(struct ethheader)); 
-
-    printf("       From: %s\n", inet_ntoa(ip->iph_sourceip));  
-    printf("         To: %s\n", inet_ntoa(ip->iph_destip));   
+                           (packet + sizeof(struct ethheader));   
 
     /* determine protocol */
     switch(ip->iph_protocol) {                               
         case IPPROTO_TCP:
-            printf("   Protocol: TCP\n");
+            //printf("   Protocol: TCP\n");
             return;
         case IPPROTO_UDP:
             printf("   Protocol: UDP\n");
+            printf("       From: %s\n", inet_ntoa(ip->iph_sourceip));  
+            printf("         To: %s\n", inet_ntoa(ip->iph_destip)); 
             spoof_reply(ip);
             return;
         case IPPROTO_ICMP:
-            printf("   Protocol: ICMP\n");
+            //printf("   Protocol: ICMP\n");
             return;
         default:
-            printf("   Protocol: others\n");
+            //printf("   Protocol: others\n");
             return;
     }
   }
