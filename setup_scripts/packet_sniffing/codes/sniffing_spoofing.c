@@ -66,8 +66,8 @@ void spoof_reply(struct ipheader* ip)
     int ip_header_len = ip->iph_ihl * 4;
     struct udpheader* udp = (struct udpheader *) ((u_char *)ip + 
                                                   ip_header_len);
-    if (ntohs(udp->udp_dport) != 9999) {
-        // Only spoof UDP packet with destination port 9999
+    if (ntohs(udp->udp_dport) != 9090) {
+        // Only spoof UDP packet with destination port 9090
         return;
     }
 
