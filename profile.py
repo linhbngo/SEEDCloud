@@ -14,6 +14,7 @@ import sys
 TBURL = "http://www.emulab.net/downloads/openstack-setup-v33.tar.gz"
 TBPERM = "sudo chmod -R 755 /local/repository/*.sh"
 IMAGE = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
+IMAGE_ARM = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-ARM"
 
 #
 # For now, disable the testbed's root ssh key service until we can remove ours.
