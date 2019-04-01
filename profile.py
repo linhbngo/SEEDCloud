@@ -43,6 +43,8 @@ pc.defineParameter("studentCount", "Number of students",
                    portal.ParameterType.INTEGER, 1)
 pc.defineParameter("raw", "Use physical nodes",
                     portal.ParameterType.BOOLEAN, False)
+pc.defineParameter("arm", "Use Utah's ARM",
+                    portal.ParameterType.BOOLEAN, False)
 
 #
 # Get any input parameter values that will override our defaults.
@@ -87,7 +89,11 @@ for i in range(params.studentCount + 1):
       node = Node("instructor", False)
     else:
       node = Node("lab_instance_"+str(i), False)
-    node.disk_image = IMAGE
+    
+    if params.arm:
+      node.disk_image = IMAGE_ARM
+    else:
+      node.disk_image = IMAGE
     local_ip_count += 1                    
     iface = node.addInterface("if" + str(local_ip_count))
     iface.component_id = "eth1"
@@ -100,7 +106,10 @@ for i in range(params.studentCount + 1):
 # run various programs that keep sending packets to the instructor's machine
 if params.seedlabtype == "packet_sniffing":                 
   node = Node("target", False)
-  node.disk_image = IMAGE
+  if params.arm:
+    node.disk_image = IMAGE_ARM
+  else:
+    node.disk_image = IMAGE
   local_ip_count += 1
   iface = node.addInterface("if" + str(local_ip_count))
   iface.component_id = "eth1"                    
