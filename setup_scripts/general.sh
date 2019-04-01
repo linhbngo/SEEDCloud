@@ -33,5 +33,5 @@ sudo usermod -a -G sudo seed
 
 # activate password connection
 
-sudo set 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+sudo sed 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sudo service ssh restart
