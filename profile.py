@@ -67,15 +67,14 @@ tour.Description(IG.Tour.TEXT,tourDescription)
 #tour.Instructions(IG.Tour.MARKDOWN,tourInstructions)
 rspec.addTour(tour)
 
-def Node(name, public):
+def Node(name):
   if params.raw:
     newnode = RSpec.RawPC(name)
   else:
     newnode = IG.XenVM(name)
     newnode.ram = 2048
     newnode.cores = 2
-  if public:
-   newnode.routable_control_ip = True
+  newnode.routable_control_ip = True
   return newnode                    
 
 # Setup experiments for individual students plus one lab instructor
@@ -86,9 +85,9 @@ local_ip_count = 0
 for i in range(params.studentCount + 1):
   if params.seedlabtype == "software":
     if i == 0:
-      node = Node("instructor", False)
+      node = Node("instructor")
     else:
-      node = Node("lab_instance_"+str(i), False)
+      node = Node("lab_instance_"+str(i))
     
     if params.arm:
       node.disk_image = IMAGE_ARM
