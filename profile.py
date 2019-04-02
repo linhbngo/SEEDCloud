@@ -99,8 +99,7 @@ for i in range(params.studentCount + 1):
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     lan.addInterface(iface)
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
+    node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/software.sh"))
     rspec.addResource(node)   
-    
-    
-    
+         
 pc.printRequestRSpec(rspec)
