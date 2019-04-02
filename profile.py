@@ -38,7 +38,7 @@ pc = portal.Context()
 #
 
 pc.defineParameter("seedlabtype","SEED Lab",
-                   portal.ParameterType.STRING,"packet_sniffing",[("packet_sniffing","Packet Sniffing and Spoofing"),("tcp_ip","TCP/IP Attack"),("buffer_overflow","Buffer Overflow Vulnerability"),("return-to-libc","Return-to-Libc Attack"),("environment-setuid","Environment Variable and Set-UID"),("csrf","Cross-site Request Forgery"),("xsf","Cross-site Scripting Attack"),("sql","SQL Injection Attack")])
+                   portal.ParameterType.STRING,"software",[("software","Software Security"),("web","Web Security"),("network","Network Security")])
 pc.defineParameter("studentCount", "Number of students",
                    portal.ParameterType.INTEGER, 1)
 pc.defineParameter("raw", "Use physical nodes",
@@ -84,7 +84,7 @@ rspec.addResource(lan)
 prefixForIP = "192.168.1."
 local_ip_count = 0                   
 for i in range(params.studentCount + 1):
-  if params.seedlabtype == "packet_sniffing":
+  if params.seedlabtype == "software":
     if i == 0:
       node = Node("instructor", False)
     else:
@@ -100,25 +100,7 @@ for i in range(params.studentCount + 1):
     iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
     lan.addInterface(iface)
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
-    rspec.addResource(node)
-                    
-# for packet sniffing, we need one target node that would run a netcat listening post and also 
-# run various programs that keep sending packets to the instructor's machine
-if params.seedlabtype == "packet_sniffing":                 
-  node = Node("target", False)
-  if params.arm:
-    node.disk_image = IMAGE_ARM
-  else:
-    node.disk_image = IMAGE
-  local_ip_count += 1
-  iface = node.addInterface("if" + str(local_ip_count))
-  iface.component_id = "eth1"                    
-  iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-  lan.addInterface(iface)
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/packet_sniffing/target.sh"))
-  rspec.addResource(node)
-    
+    rspec.addResource(node)   
     
     
     
