@@ -45,7 +45,7 @@ lan = RSpec.LAN()
 rspec.addResource(lan)
 prefixForIP = "192.168.1."
 local_ip_count = 0                   
-for i in range(params.studentCount + 1):
+for i in range(params.machines):
   if i == 0:
     node = Node("head")
   else:
