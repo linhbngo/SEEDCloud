@@ -56,8 +56,8 @@ for i in range(params.machines):
   iface.component_id = "eth1"
   iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
   lan.addInterface(iface)
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_docker.sh"))
   
+  # setup NFS
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo apt-get install -y nfs-kernel-server"))
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
@@ -70,6 +70,10 @@ for i in range(params.machines):
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
     node.addService(RSpec.Execute("sh", "sudo mount 192.168.1.1:/opt/keys /opt/keys"))
   rspec.addResource(node)   
+  
+  # setup Docker
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_docker.sh"))
+
   #if params.seedlabtype == "software":
          
 pc.printRequestRSpec(rspec)
