@@ -59,12 +59,14 @@ for i in range(params.machines):
   
   # setup NFS
   if i == 0:
+    node.addService(RSpec.Execute("sh", "sudo apt-get update"))
     node.addService(RSpec.Execute("sh", "sudo apt-get install -y nfs-kernel-server"))
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
     node.addService(RSpec.Execute("sh", "sudo chown nobody:nogroup /opt/keys"))
     for i in range(1,params.machines):
       node.addService(RSpec.Execute("sh", "sudo echo '/opt/keys 192.168.1." + str(i+1) + "(rw,sync,no_root_squash,no_subtree_check)' | sudo tee -a /etc/exports"))
   else:
+    node.addService(RSpec.Execute("sh", "sudo apt-get update"))
     node.addService(RSpec.Execute("sh", "sudo apt-get install -y nfs-common"))
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
     node.addService(RSpec.Execute("sh", "sleep 3m"))
