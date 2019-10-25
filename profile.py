@@ -72,7 +72,6 @@ for i in range(params.machines):
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
     node.addService(RSpec.Execute("sh", "sleep 3m"))
     node.addService(RSpec.Execute("sh", "sudo mount 192.168.1.1:/opt/keys /opt/keys"))
-  rspec.addResource(node)   
   
   # setup Docker
   node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_docker.sh"))
@@ -85,6 +84,7 @@ for i in range(params.machines):
     node.addService(RSpec.Execute("sh", "sleep 1m"))
     node.addService(RSpec.Execute("sh", "docker swarm join --token `more /opt/keys/docker.swarm` 192.168.1.1:7777"))
 
+  rspec.addResource(node)   
   #if params.seedlabtype == "software":
          
 pc.printRequestRSpec(rspec)
