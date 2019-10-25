@@ -67,6 +67,7 @@ for i in range(params.machines):
   else:
     node.addService(RSpec.Execute("sh", "sudo apt-get install -y nfs-common"))
     node.addService(RSpec.Execute("sh", "sudo mkdir -p /opt/keys"))
+    node.addService(RSpec.Execute("sh", "sleep 3m"))
     node.addService(RSpec.Execute("sh", "sudo mount 192.168.1.1:/opt/keys /opt/keys"))
   rspec.addResource(node)   
   
