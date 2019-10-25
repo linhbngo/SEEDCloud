@@ -80,9 +80,7 @@ for i in range(params.machines):
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_manager.sh"))
   else: 
-    node.addService(RSpec.Execute("sh", "sleep 1m"))
-    node.addService(RSpec.Execute("sh", "docker swarm join --token `more /opt/keys/docker.swarm` 192.168.1.1:7777"))
-
+    node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_worker.sh"))
   rspec.addResource(node)   
   #if params.seedlabtype == "software":
          
