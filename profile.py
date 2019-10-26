@@ -25,15 +25,10 @@ pc.defineParameter("seedlabtype","SEED Lab",
                     ("network","Network Security")])
 pc.defineParameter("machines", "Number of physical nodes",
                    portal.ParameterType.INTEGER, 1)
+pc.defineParameter("students", "Number of students",
+                   portal.ParameterType.INTEGER, 1)
 params = pc.bindParameters()
 pc.verifyParameters()
-
-tourDescription = \
-  "This profile provides a configurable SEED Lab infrastructure"
-tour = IG.Tour()
-tour.Description(IG.Tour.TEXT,tourDescription)
-#tour.Instructions(IG.Tour.MARKDOWN,tourInstructions)
-rspec.addTour(tour)
 
 def Node(name):
   newnode = RSpec.RawPC(name)
@@ -79,9 +74,31 @@ for i in range(params.machines):
   # launch swarm
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_manager.sh"))
+    node.addService(RSpec.Execute("sh", "sleep 2m"))    
   else: 
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_worker.sh"))
+  
+  # deploy lab containers
+  if params.seedlabtype == "software":
+    if i == 0:
+      for k in range(params.students):
+        
+  
+    
+    
   rspec.addResource(node)   
-  #if params.seedlabtype == "software":
-         
+  
+
+tourDescription = \
+  "This profile provides a configurable SEED Lab infrastructure"
+tour = IG.Tour()
+tour.Description(IG.Tour.TEXT,tourDescription)
+tourInstruction = ''
+for i in range(params.students):
+  tmpPort = 8800 + i
+  tourInstruction += '[Seat ' + str(i + 1) + '](http://{host-head}:' + str(tmpPort) + '/)\n'
+
+tour.Instructions( geni.rspec.igext.Tour.MARKDOWN, tourInstruction)
+rspec.addTour(tour)
+  
 pc.printRequestRSpec(rspec)
