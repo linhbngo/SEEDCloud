@@ -98,7 +98,7 @@ for i in range(params.students):
   tmpPort = 8800 + i
   tourInstruction += '[Seat ' + str(i + 1) + '](http://{host-head}:' + str(tmpPort) + '/)\n'
 
-tour.Instructions( geni.rspec.igext.Tour.MARKDOWN, tourInstruction)
+tour.Instructions( IG.Tour.MARKDOWN, tourInstruction)
 rspec.addTour(tour)
   
 pc.printRequestRSpec(rspec)
