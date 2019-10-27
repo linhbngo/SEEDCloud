@@ -83,8 +83,7 @@ for i in range(params.machines):
     if i == 0:
       for k in range(params.students):
         tmpPort = 8800 + i
-        docker_service = 'sudo -H -u lngo bash -c "docker service create -d -p ' + str(tmpPort) + ':8888 linhbngo/csc302:software.1204.dirtycow.0.9"'
-        node.addService(RSpec.Execute("sh", docker_service))
+        node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + str(tmpPort)))
   
   rspec.addResource(node)   
   
