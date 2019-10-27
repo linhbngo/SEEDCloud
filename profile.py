@@ -81,6 +81,7 @@ for i in range(params.machines):
   # deploy lab containers
   if params.seedlabtype == "software":
     if i == 0:
+      node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/build_dirtycow.sh"))
       for k in range(params.students):
         tmpPort = str(8800 + k + 1)
         tmpHost = ' seat' + str(k + 1) + ' '
