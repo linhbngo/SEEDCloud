@@ -74,7 +74,7 @@ for i in range(params.machines):
   # launch swarm
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_manager.sh"))
-    node.addService(RSpec.Execute("sh", "sleep 2m"))    
+    node.addService(RSpec.Execute("sh", "sleep 4m"))    
   else: 
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_worker.sh"))
   
