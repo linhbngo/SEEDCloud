@@ -82,8 +82,9 @@ for i in range(params.machines):
   if params.seedlabtype == "software":
     if i == 0:
       for k in range(params.students):
-        tmpPort = 8800 + k
-        node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + str(tmpPort)))
+        tmpPort = str(8800 + k + 1)
+        tmpHost = ' seat' + str(k + 1) + ' '
+        node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + tmpPort + tmpHost))
   
   rspec.addResource(node)   
   
