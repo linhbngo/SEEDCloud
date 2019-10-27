@@ -84,7 +84,8 @@ for i in range(params.machines):
       for k in range(params.students):
         tmpPort = str(8800 + k + 1)
         tmpHost = ' seat' + str(k + 1) + ' '
-        node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + tmpPort + tmpHost))
+        tmpIP = '10.0.0.' + str(k + 1)
+        node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + tmpPort + tmpHost + tmpIP))
   
   rspec.addResource(node)   
   
