@@ -95,8 +95,8 @@ tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 tourInstruction = ''
 for i in range(params.students):
-  tmpPort = 8800 + i
-  tourInstruction += '[Seat ' + str(i + 1) + '](http://{host-head}:' + str(tmpPort) + '/)\n'
+  tmpPort = str(8800 + i + 1)
+  tourInstruction += '[Seat ' + str(i + 1) + '](http://{host-head}:' + tmpPort + '/)\n'
 
 tour.Instructions( IG.Tour.MARKDOWN, tourInstruction)
 rspec.addTour(tour)
