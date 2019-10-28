@@ -68,10 +68,12 @@ for i in range(params.machines):
     node.addService(RSpec.Execute("sh", "sleep 3m"))
     node.addService(RSpec.Execute("sh", "sudo mount 192.168.1.1:/opt/keys /opt/keys"))
   
-  # setup Docker
+  # setup Docker and Kubernetes 
   node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_docker.sh"))
-  
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_kubernetes.sh"))
+
   # launch swarm
+  """
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_manager.sh"))
     node.addService(RSpec.Execute("sh", "sleep 4m"))    
@@ -87,7 +89,7 @@ for i in range(params.machines):
         tmpHost = ' seat' + str(k + 1) + ' '
         tmpIP = '10.0.0.' + str(k + 1)
         node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + tmpPort + tmpHost + tmpIP))
-  
+  """
   rspec.addResource(node)   
   
 
