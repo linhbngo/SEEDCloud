@@ -79,6 +79,7 @@ for i in range(params.machines):
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_worker.sh"))
   
   # deploy lab containers
+  """
   if params.seedlabtype == "software":
     if i == 0:
       node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/build_dirtycow.sh"))
@@ -87,7 +88,7 @@ for i in range(params.machines):
         tmpHost = ' seat' + str(k + 1) + ' '
         tmpIP = '10.0.0.' + str(k + 1)
         node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/launch_dirtycow.sh " + tmpPort + tmpHost + tmpIP))
-  
+  """
   rspec.addResource(node)   
   
 
