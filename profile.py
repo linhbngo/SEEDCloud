@@ -73,13 +73,13 @@ for i in range(params.machines):
   node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_kubernetes.sh"))
 
   # launch swarm
-  """
   if i == 0:
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_manager.sh"))
     node.addService(RSpec.Execute("sh", "sleep 4m"))    
   else: 
     node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/swarm_worker.sh"))
-  
+    
+  """
   # deploy lab containers
   if params.seedlabtype == "software":
     if i == 0:
