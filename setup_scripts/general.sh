@@ -43,5 +43,3 @@ sudo apt-get install -y binutils \
 sudo cp bashrc /home/seed/.bashrc
 chown seed: /home/seed/.bashrc
 sudo cp bashrc /root/.bashrc
-
-CMD /bin/bash
