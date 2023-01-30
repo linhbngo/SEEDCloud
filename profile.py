@@ -14,7 +14,7 @@ import sys
 IMAGE = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
 
 disableTestbedRootKeys = True
-rspec = RSpec.Request()
+request = pc.makeRequestRSpec()
 pc = portal.Context()
 
 pc.defineParameter("students", "Number of students",
@@ -23,13 +23,12 @@ params = pc.bindParameters()
 pc.verifyParameters()
 
 def Node(name):
-  newnode = RSpec.XenVM(name)
+  newnode = request.XenVM(name)
   newnode.routable_control_ip = True
   return newnode                    
 
 # Setup experiments for individual students plus one lab instructor
-lan = RSpec.LAN()
-rspec.addResource(lan)
+lan = request.LAN()
 prefixForIP = "192.168.1."
 local_ip_count = 0                   
 for i in range(params.students):
@@ -49,6 +48,6 @@ tourDescription = \
   "This profile provides a configurable SEED Lab infrastructure"
 tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
-rspec.addTour(tour)
+request.addTour(tour)
   
-pc.printRequestRSpec(rspec)
+pc.printRequestRSpec(request)
