@@ -14,8 +14,9 @@ import sys
 IMAGE = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU20-64-STD"
 
 disableTestbedRootKeys = True
-request = pc.makeRequestRSpec()
 pc = portal.Context()
+request = pc.makeRequestRSpec()
+
 
 pc.defineParameter("students", "Number of students",
                    portal.ParameterType.INTEGER, 1)
