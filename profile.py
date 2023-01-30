@@ -43,9 +43,7 @@ for i in range(params.machines):
   iface.component_id = "eth1"
   iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
   lan.addInterface(iface)
-
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_docker.sh"))
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/install_kubernetes.sh"))
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
 
 tourDescription = \
   "This profile provides a configurable SEED Lab infrastructure"
