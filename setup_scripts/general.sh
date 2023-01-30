@@ -10,7 +10,7 @@ sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_c
 service ssh restart
 
 # update Ubuntu's repository
-DEBIAN_FRONTEND=noninteractive
+export DEBIAN_FRONTEND=noninteractive
 apt-get -y update
 
 # setup Docker
