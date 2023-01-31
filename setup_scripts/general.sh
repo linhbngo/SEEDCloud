@@ -24,6 +24,6 @@ python3 /local/repository/get-pip3.py
 pip3 install scapy
      
 
-cp /local/repository/bashrc /home/seed/.bashrc
+cp /local/repository/bashrc.txt /home/seed/.bashrc
 chown seed: /home/seed/.bashrc
-cp /local/repository/bashrc /root/.bashrc
+cp /local/repository/bashrc.txt /root/.bashrc
