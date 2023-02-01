@@ -40,8 +40,8 @@ for i in range(params.students):
     node = Node("instructor")
   else:
     node = Node("student_"+str(i))
-  node.cores = 2048
-  node.ram = params.ramsize
+  node.cores = 2
+  node.ram = 2048
   node.disk_image = IMAGE
   local_ip_count += 1                    
   iface = node.addInterface("if" + str(local_ip_count))
