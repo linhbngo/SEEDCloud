@@ -39,7 +39,7 @@ for i in range(params.students):
   if i == 0:
     node = Node("instructor")
   else:
-    node = Node("student_"+str(i + 1))
+    node = Node("student_"+str(i))
   node.disk_image = IMAGE
   local_ip_count += 1                    
   iface = node.addInterface("if" + str(local_ip_count))
