@@ -20,6 +20,9 @@ request = pc.makeRequestRSpec()
 
 pc.defineParameter("students", "Number of students",
                    portal.ParameterType.INTEGER, 1)
+pc.defineParameter("password", 
+                   "Password for SEED servers", 
+                   portal.ParameterType.STRING, 'dees' )
 params = pc.bindParameters()
 pc.verifyParameters()
 
@@ -43,7 +46,7 @@ for i in range(params.students):
   iface.component_id = "eth1"
   iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
   lan.addInterface(iface)
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh"))
+  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh " + params.password))
 
 tourDescription = \
   "This profile provides a configurable SEED Lab infrastructure"
