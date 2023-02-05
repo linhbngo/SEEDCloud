@@ -26,7 +26,9 @@ rm -rf /var/lib/apt/lists/*
      
 python3 /local/repository/get-pip3.py 
 pip3 install scapy
-     
+
+git clone https://github.com/longld/peda.git
+echo "source $HOME/peda/peda.py" > $HOME/.gdbinit
 
 cp /local/repository/bashrc.txt /home/seed/.bashrc
 chown seed: /home/seed/.bashrc
