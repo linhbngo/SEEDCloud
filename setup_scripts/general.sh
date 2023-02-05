@@ -5,9 +5,9 @@ set -x
 useradd -m -s /bin/bash seed
 echo "root:${1}" | chpasswd
 echo "seed:${1}" | chpasswd
+usermod -a -G sudo seed
 
 # useradd -m -p WchOyJRR.1Qrc -s /bin/bash seed
-# usermod -a -G sudo seed
 
 # activate password connection
 sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
