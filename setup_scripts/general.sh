@@ -21,14 +21,17 @@ apt-get -y update
 apt-get install -y binutils curl iproute2 iputils-ping nano
 apt-get install -y net-tools unzip arping conntrack curl dnsutils 
 apt-get install -y iptables mtr-tiny netcat openbsd-inetd procps
-apt-get install -y tcpdump telnet telnetd python3.8-distutils
+apt-get install -y tcpdump telnet telnetd python3.8-distutils gcc-multilib g++-multilib
 rm -rf /var/lib/apt/lists/*
      
 python3 /local/repository/get-pip3.py 
 pip3 install scapy
 
 git clone https://github.com/longld/peda.git
-echo "source $HOME/peda/peda.py" > $HOME/.gdbinit
+mv peda /home/seed
+chown -R seed: /home/seed/peda
+echo "source $HOME/peda/peda.py" > /home/seed/.gdbinit
+chown -R seed: /home/seed/.gdbinit
 
 cp /local/repository/bashrc.txt /home/seed/.bashrc
 chown seed: /home/seed/.bashrc
