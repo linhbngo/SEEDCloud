@@ -19,7 +19,7 @@ request = pc.makeRequestRSpec()
 
 pc.defineParameter("password", 
                    "Password for SEED servers", 
-                   portal.ParameterType.STRING, 'dees' )
+                   portal.ParameterType.STRING, 'g0ld3nr@m5' )
 params = pc.bindParameters()
 pc.verifyParameters()
 
