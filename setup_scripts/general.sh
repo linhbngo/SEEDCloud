@@ -30,7 +30,7 @@ pip3 install scapy
 git clone https://github.com/longld/peda.git
 mv peda /home/seed
 chown -R seed: /home/seed/peda
-echo "source $HOME/peda/peda.py" > /home/seed/.gdbinit
+echo "source /home/seed/peda/peda.py" > /home/seed/.gdbinit
 chown -R seed: /home/seed/.gdbinit
 
 cp /local/repository/bashrc.txt /home/seed/.bashrc
