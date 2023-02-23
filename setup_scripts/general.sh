@@ -36,3 +36,8 @@ chown -R seed: /home/seed/.gdbinit
 cp /local/repository/bashrc.txt /home/seed/.bashrc
 chown seed: /home/seed/.bashrc
 cp /local/repository/bashrc.txt /root/.bashrc
+
+# the username needs to be changed
+while IFS= read -r line; do
+  sudo usermod -s /bin/bash $line
+done < <( ls -l /users | grep 4096 | cut -d' ' -f3 )
