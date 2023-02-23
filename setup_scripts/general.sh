@@ -10,8 +10,8 @@ usermod -a -G sudo seed
 # useradd -m -p WchOyJRR.1Qrc -s /bin/bash seed
 
 # activate password connection
-sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
-service ssh restart
+# sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+# service ssh restart
 
 # update Ubuntu's repository
 export DEBIAN_FRONTEND=noninteractive
