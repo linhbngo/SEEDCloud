@@ -17,9 +17,6 @@ disableTestbedRootKeys = True
 pc = portal.Context()
 request = pc.makeRequestRSpec()
 
-
-pc.defineParameter("students", "Number of students",
-                   portal.ParameterType.INTEGER, 1)
 pc.defineParameter("password", 
                    "Password for SEED servers", 
                    portal.ParameterType.STRING, 'dees' )
@@ -35,20 +32,17 @@ def Node(name):
 lan = request.LAN()
 prefixForIP = "192.168.1."
 local_ip_count = 0                   
-for i in range(params.students):
-  if i == 0:
-    node = Node("instructor")
-  else:
-    node = Node("student_"+str(i))
-  node.cores = 2
-  node.ram = 2048
-  node.disk_image = IMAGE
-  local_ip_count += 1                    
-  iface = node.addInterface("if" + str(local_ip_count))
-  iface.component_id = "eth1"
-  iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
-  lan.addInterface(iface)
-  node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh " + params.password))
+
+node = Node("seed")
+node.cores = 2
+node.ram = 2048
+node.disk_image = IMAGE
+local_ip_count += 1                    
+iface = node.addInterface("if" + str(local_ip_count))
+iface.component_id = "eth1"
+iface.addAddress(RSpec.IPv4Address(prefixForIP + str(local_ip_count), "255.255.255.0"))
+lan.addInterface(iface)
+node.addService(RSpec.Execute("sh", "sudo bash /local/repository/setup_scripts/general.sh " + params.password))
 
 tourDescription = \
   "This profile provides a configurable SEED Lab infrastructure"
